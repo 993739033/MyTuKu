@@ -49,7 +49,7 @@ public class ImageLoadUtils {
                 ContentResolver resolver=context.getContentResolver();
                 Cursor mcursor = resolver.query(imageuri, null,
                         MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?"
-                        , new String[]{"image/jpeg", "image/png"}, MediaStore.Images.Media.DATE_MODIFIED);
+                        , new String[]{"image/jpeg", "image/png"}, MediaStore.Images.Media.DEFAULT_SORT_ORDER);
 
                 while(mcursor.moveToNext()){
                     //查询所有图片的path

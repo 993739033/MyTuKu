@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
         app:cardCornerRadius="10dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
         app:cardElevation="10dp"
         android:layout_width="100dp"
         android:layout_height="100dp">

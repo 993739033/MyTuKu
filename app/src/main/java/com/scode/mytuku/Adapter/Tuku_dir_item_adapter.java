@@ -34,7 +34,7 @@ public class Tuku_dir_item_adapter extends RecyclerView.Adapter<dir_image_viewho
     @Override
     public void onBindViewHolder(dir_image_viewholder holder, int position) {
         File image = imagePaths.get(position);
-        Glide.with(mcontext).load(image).into(holder.cardview);
+        Glide.with(mcontext).load(image).asBitmap().placeholder(R.drawable.question).error(R.drawable.error).into(holder.cardview);
     }
 
     @Override
