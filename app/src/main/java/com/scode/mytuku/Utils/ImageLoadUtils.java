@@ -1,4 +1,4 @@
-package com.scode.mytuku;
+package com.scode.mytuku.Utils;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -6,8 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
+
+import com.scode.mytuku.JavaBean.ImageFloder;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 
 public class ImageLoadUtils {
+
     public ProgressDialog progressDialog;
     String firstImage=null;
     HashSet<String> mdirset = new HashSet<>();//声明一个hashset用于判断是否已经扫描过此文件夹
@@ -63,9 +65,10 @@ public class ImageLoadUtils {
                     if (parentDir == null) {//没有父类路径？？在内存卡中还会没有父类路径
                         continue;
                     }
-                    if (mdirset.contains(parentDir)){
+                    if (mdirset.contains(parentDir.getAbsolutePath())){
                         continue;
                     }else{
+                        mdirset.add(parentDir.getAbsolutePath());//记得添加新的文件夹的path到set中进行比较
                         imagefloder=new ImageFloder();//当此文件夹为新的文件再进行添加
                         imagefloder.setFirstimagepath(imagepath);//设置第一张图片
                         imagefloder.setDir(parentDir.getAbsolutePath());//设置该文件夹
@@ -77,12 +80,15 @@ public class ImageLoadUtils {
                             }
                         }).length;
                         totalsize+=piccount;
-                        imagefloder.setCount(piccount);
+                        imagefloder.setCount(piccount+"");
+                        imagefloders.add(imagefloder);
+
                         if(piccount>mPicCount){
                             mPicCount=piccount;
                             mImgDir = parentDir;
                         }
                     }
+
                 }
                 mcursor.close();
                 //将hashset设置为null  辅助的set释放掉
