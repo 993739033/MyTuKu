@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.scode.mytuku.Adapter.Tuku_dir_item_adapter;
@@ -18,9 +19,10 @@ import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.List;
 
-public class dir_images extends AppCompatActivity {
+public class Show_Dir_pic_Activity extends AppCompatActivity {
     List<File> images;
     RecyclerView recyclerView;
+    Tuku_dir_item_adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,19 @@ public class dir_images extends AppCompatActivity {
                 outRect.right=3;
             }
         });
-        Tuku_dir_item_adapter adapter = new Tuku_dir_item_adapter(images);
+         adapter= new Tuku_dir_item_adapter(images);
         recyclerView.setAdapter(adapter);
-
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK&&adapter.isbetouched) {
+            adapter.isbetouched=false;
+            adapter.hashSet.clear();
+            adapter.notifyDataSetChanged();
+            return false;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+
 }

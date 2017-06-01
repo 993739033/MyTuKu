@@ -13,7 +13,7 @@ import com.scode.mytuku.R;
  * Created by 知らないのセカイ on 2017/5/30.
  */
 
-public class main_viewholder extends RecyclerView.ViewHolder {
+public class path_image_viewholder extends RecyclerView.ViewHolder {
     public ImageView cardview;
     public TextView dirname;
     public TextView pathname;
@@ -22,7 +22,7 @@ public class main_viewholder extends RecyclerView.ViewHolder {
 
 
 
-    public main_viewholder(View itemView) {
+    public path_image_viewholder(View itemView) {
         super(itemView);
         cardview = (ImageView) itemView.findViewById(R.id.recy_image);
         dirname = (TextView) itemView.findViewById(R.id.dirname);
